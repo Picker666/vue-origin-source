@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>v-model</h1>
+  <div id="app">
+    <p>first one: {{name}}</p>
+    <input type="text" v-model="name">
+    <p>{{name}}---more: {{more.like}}</p>
+    <input type="text" v-model="more.like">
+
+    <button @click="handleClick">go</button>
+  </div>
+</body>
+</html>
+<script src="./vue.js"></script>
+<script>
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      name: 'Picker',
+      more: {
+        like: 'coding'
+      }
+    },
+    methods: {
+      handleClick() {
+        console.log('this.name: ', this.name);
+        console.log('this.more.like: ', this.more.like);
+      }
+    },
+  });
+  console.log('vm: ', vm);
+</script>
+<!-- https://www.bilibili.com/video/BV1934y1a7MN/?spm_id_from=333.337.search-card.all.click&vd_source=99d7b9be1d23682cda05e809a9c06a86 -->

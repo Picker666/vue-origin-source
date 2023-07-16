@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vue - computed/watch</title>
+</head>
+<body>
+  <div id="app">
+    {{message}}
+    <p>this is first msg: {{msg}}</p>
+    <p>this is second msg: {{msg}}</p>
+    message change: <input type="text" v-model="message">
+    <h2>messageWatcher: {{messageWatcher}}</h2>
+
+    <p>this is objWatch: {{objWatch}}</p>
+    obj change: <input type="text" v-model="obj.name">
+  </div>
+</body>
+</html>
+
+<script src="./vue.js"></script>
+<script>
+
+  new Vue({
+    el: '#app',
+    data: {
+      message: 'this is picker`s vue',
+      messageWatcher: '',
+      obj: {
+        name: 'Picker'
+      },
+      objWatch: ''
+    },
+    computed: {
+      msg(){
+        console.log('66666');
+        return this.message + ' computed...'
+      },
+    },
+    watch: {
+      'message': {
+        handler(newVal, oldVal) {
+          this.messageWatcher = this.message + 'watch'
+        },
+        immediate: true // 初始渲染生效
+      },
+      'obj': {
+        handler(oldVal, newVal){
+          console.log('oldVal, newVal: ', oldVal, newVal);
+          this.objWatch = `姓名是：${this.obj.name}`
+        },
+        deep: true,
+        immediate: true
+      },
+      'obj.name': {
+        handler(oldVal, newVal) {
+          console.log('obj.name === oldVal, newVal: ', oldVal, newVal);
+        }
+      }
+    }
+  })
+</script>
